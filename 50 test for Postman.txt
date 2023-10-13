@@ -1,0 +1,355 @@
+50 наиболее популярных тестов в Postman:
+
+1. Тестирование статус кода ответа:
+```javascript
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+```
+
+2. Проверка значения заголовка:
+```javascript
+pm.test("Response header contains Content-Type", function () {
+    pm.response.to.have.header("Content-Type");
+});
+```
+
+3. Проверка значения из тела ответа:
+```javascript
+pm.test("Response body contains 'example'", function () {
+    pm.expect(pm.response.text()).to.include("example");
+});
+```
+
+4. Проверка значения переменной окружения:
+```javascript
+pm.test("Environment variable is set", function () {
+    pm.expect(pm.environment.get("variable")).to.exist;
+});
+```
+
+5. Проверка наличия поля в JSON-ответе:
+```javascript
+pm.test("Response body contains field 'name'", function () {
+    pm.expect(pm.response.json()).to.have.property("name");
+});
+```
+
+6. Проверка значения с помощью регулярного выражения:
+```javascript
+pm.test("Response body matches pattern", function () {
+    pm.expect(pm.response.text()).to.match(/pattern/);
+});
+```
+
+7. Проверка наличия значения в массиве:
+```javascript
+pm.test("Response body contains value in array", function () {
+    pm.expect(pm.response.json().array).to.include("value");
+});
+```
+
+8. Проверка длины массива:
+```javascript
+pm.test("Response body array length is 5", function () {
+    pm.expect(pm.response.json().array).to.have.lengthOf(5);
+});
+```
+
+9. Проверка числового значения:
+```javascript
+pm.test("Response body number is greater than 10", function () {
+    pm.expect(pm.response.json().number).to.be.above(10);
+});
+```
+
+10. Проверка наличия значения в объекте:
+```javascript
+pm.test("Response body contains key 'key'", function () {
+    pm.expect(pm.response.json().object).to.have.property("key");
+});
+```
+
+11. Проверка значения всех элементов массива:
+```javascript
+pm.test("Response body array contains only positive numbers", function () {
+    pm.expect(pm.response.json().array).to.satisfy((array) => array.every((item) => item >= 0));
+});
+```
+
+12. Проверка типа значения:
+```javascript
+pm.test("Response body number is of type 'number'", function () {
+    pm.expect(typeof pm.response.json().number).to.equal("number");
+});
+```
+
+13. Проверка количества элементов:
+```javascript
+pm.test("Response body has 10 items", function () {
+    pm.expect(pm.response.json().length).to.equal(10);
+});
+```
+
+14. Проверка даты:
+```javascript
+pm.test("Response body date is today", function () {
+    pm.expect(pm.response.json().date).to.equal(new Date().toISOString().slice(0, 10));
+});
+```
+
+15. Проверка наличия значения в множестве:
+```javascript
+pm.test("Response body contains value in set", function () {
+    pm.expect(pm.response.json().set).to.include.members(["value"]);
+});
+```
+
+16. Проверка наличия значения в строке:
+```javascript
+pm.test("Response body contains substring 'example'", function () {
+    pm.expect(pm.response.text()).to.include("example");
+});
+```
+
+17. Проверка длины строки:
+```javascript
+pm.test("Response body string length is 10", function () {
+    pm.expect(pm.response.text().length).to.equal(10);
+});
+```
+
+18. Проверка наличия cookie:
+```javascript
+pm.test("Response contains cookie 'session'", function () {
+    pm.expect(pm.cookies.has("session")).to.be.true;
+});
+```
+
+19. Проверка значения cookie:
+```javascript
+pm.test("Cookie 'session' has value '123'", function () {
+    pm.expect(pm.cookies.get("session")).to.equal("123");
+});
+```
+
+20. Проверка запроса на rediret:
+```javascript
+pm.test("Response redirected", function () {
+    pm.expect(pm.response).to.have.redirect;
+});
+```
+
+21. Проверка времени ответа:
+```javascript
+pm.test("Response time is less than 500ms", function () {
+    pm.expect(pm.response.responseTime).to.be.below(500);
+});
+```
+
+22. Проверка наличия заголовка в ответе:
+```javascript
+pm.test("Response header 'Content-Type' exists", function () {
+    pm.response.headers.has('Content-Type');
+});
+```
+
+23. Проверка отсутствия значения в ответе:
+```javascript
+pm.test("Response body does not contain 'example'", function () {
+    pm.expect(pm.response.text()).to.not.include("example");
+});
+```
+
+24. Проверка значения заголовка Content-Type:
+```javascript
+pm.test("Response header 'Content-Type' is 'application/json'", function () {
+    pm.expect(pm.response.headers.get('Content-Type')).to.eql("application/json");
+});
+```
+
+25. Проверка наличия ключей в ответе:
+```javascript
+pm.test("Response body contains all keys", function () {
+    pm.expect(pm.response.json()).to.have.all.keys("key1", "key2", "key3");
+});
+```
+
+26. Проверка количества элементов в массиве:
+```javascript
+pm.test("Response body array length is 5", function () {
+    pm.expect(pm.response.json().array).to.have.length(5);
+});
+```
+
+27. Проверка существования элемента в массиве:
+```javascript
+pm.test("Item 'example' exists in array", function () {
+    pm.expect(pm.response.json().array.includes("example")).to.be.true;
+});
+```
+
+28. Проверка отсутствия значения в массиве:
+```javascript
+pm.test("Item 'example' does not exist in array", function () {
+    pm.expect(pm.response.json().array.includes("example")).to.be.false;
+});
+```
+
+29. Проверка, что массив отсортирован по возрастанию:
+```javascript
+pm.test("Array is sorted in ascending order", function () {
+    const array = pm.response.json().array;
+    pm.expect(array).to.be.sorted({ ascending: true });
+});
+```
+
+30. Проверка, что массив отсортирован по убыванию:
+```javascript
+pm.test("Array is sorted in descending order", function () {
+    const array = pm.response.json().array;
+    pm.expect(array).to.be.sorted({ descending: true });
+});
+```
+
+31. Проверка, что массив не содержит дубликатов:
+```javascript
+pm.test("Array does not contain duplicates", function () {
+    const array = pm.response.json().array;
+    pm.expect(array).to.not.have.same.members([...new Set(array)]);
+});
+```
+
+32. Проверка, что поле не содержит пробелов:
+```javascript
+pm.test("Field 'name' does not contain spaces", function () {
+    pm.expect(pm.response.json().name).to.not.match(/\s/);
+});
+```
+
+33. Проверка, что поле является числом:
+```javascript
+pm.test("Field 'age' is a number", function () {
+    pm.expect(pm.response.json().age).to.be.a("number");
+});
+```
+
+34. Проверка, что поле является строкой:
+```javascript
+pm.test("Field 'name' is a string", function () {
+    pm.expect(pm.response.json().name).to.be.a("string");
+});
+```
+
+35. Проверка, что поле является массивом:
+```javascript
+pm.test("Field 'items' is an array", function () {
+    pm.expect(pm.response.json().items).to.be.an("array");
+});
+```
+
+36. Проверка, что поле является объектом:
+```javascript
+pm.test("Field 'data' is an object", function () {
+    pm.expect(pm.response.json().data).to.be.an("object");
+});
+```
+
+37. Проверка, что поле является булевым значением:
+```javascript
+pm.test("Field 'active' is a boolean", function () {
+    pm.expect(pm.response.json().active).to.be.a("boolean");
+});
+```
+
+38. Проверка, что поле существует:
+```javascript
+pm.test("Field 'name' exists", function () {
+    pm.expect(pm.response.json()).to.have.property("name");
+});
+```
+
+39. Проверка, что поле не существует:
+```javascript
+pm.test("Field 'address' does not exist", function () {
+    pm.expect(pm.response.json()).to.not.have.property("address");
+});
+```
+
+40. Проверка вложенного значения:
+```javascript
+pm.test("Nested field 'address.city' is 'New York'", function () {
+    pm.expect(pm.response.json().address.city).to.equal("New York");
+});
+```
+
+41. Проверка, что значение одного поля равно значению другого поля:
+```javascript
+pm.test("Field 'age' equals field 'birthYear'", function () {
+    const response = pm.response.json();
+    pm.expect(response.age).to.equal(response.birthYear);
+});
+```
+
+42. Проверка, что значение больше или равно заданной границе:
+```javascript
+pm.test("Field 'count' is greater than or equal to 10", function () {
+    pm.expect(pm.response.json().count).to.be.at.least(10);
+});
+```
+
+43. Проверка, что значение меньше или равно заданной границе:
+```javascript
+pm.test("Field 'count' is less than or equal to 100", function () {
+    pm.expect(pm.response.json().count).to.be.at.most(100);
+});
+```
+
+44. Проверка, что значение находится в заданном диапазоне:
+```javascript
+pm.test("Field 'score' is between 0 and 100", function () {
+    pm.expect(pm.response.json().score).to.be.within(0, 100);
+});
+```
+
+45. Проверка, что значение округленное до двух знаков после запятой равно:
+```javascript
+pm.test("Field 'result' rounded to 2 decimal places is 3.14", function () {
+    pm.expect(pm.response.json().result.toFixed(2)).to.equal("3.14");
+});
+```
+
+46. Проверка, что значение является числом с фиксированным количеством знаков после запятой:
+```javascript
+pm.test("Field 'pi' is a number with 2 decimal places", function () {
+    pm.expect(pm.response.json().pi).to.match(/^\d+\.\d{2}$/);
+});
+```
+
+47. Проверка, что значение имеет минимальную длину:
+```javascript
+pm.test("Field 'name' has a minimum length of 3", function () {
+    pm.expect(pm.response.json().name).to.have.lengthOf.at.least(3);
+});
+```
+
+48. Проверка, что значение имеет максимальную длину:
+```javascript
+pm.test("Field 'password' has a maximum length of 8", function () {
+    pm.expect(pm.response.json().password).to.have.lengthOf.at.most(8);
+});
+```
+
+49. Проверка, что значение является валидным email-адресом:
+```javascript
+pm.test("Field 'email' is a valid email address", function () {
+    pm.expect(pm.response.json().email).to.match(/^[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/);
+});
+```
+
+50. Проверка, что значение соответствует заданному формату даты:
+```javascript
+pm.test("Field 'date' matches format 'YYYY-MM-DD'", function () {
+    pm.expect(pm.response.json().date).to.match(/^\d{4}-\d{2}-\d{2}$/);
+});
+```
